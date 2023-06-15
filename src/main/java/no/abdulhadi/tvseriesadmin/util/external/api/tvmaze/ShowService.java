@@ -1,4 +1,4 @@
-package no.abdulhadi.tvseriesadmin.service.external.api.tvmaze;
+package no.abdulhadi.tvseriesadmin.util.external.api.tvmaze;
 
 import org.springframework.stereotype.Service;
 

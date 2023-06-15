@@ -1,9 +1,8 @@
-package no.abdulhadi.tvseriesadmin.service.logging;
+package no.abdulhadi.tvseriesadmin.util.logging;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 
 import java.util.logging.Level;

@@ -1,4 +1,4 @@
-package no.abdulhadi.tvseriesadmin.service.logging;
+package no.abdulhadi.tvseriesadmin.util.logging;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

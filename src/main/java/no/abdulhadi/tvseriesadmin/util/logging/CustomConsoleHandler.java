@@ -1,4 +1,4 @@
-package no.abdulhadi.tvseriesadmin.service.logging;
+package no.abdulhadi.tvseriesadmin.util.logging;
 
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
