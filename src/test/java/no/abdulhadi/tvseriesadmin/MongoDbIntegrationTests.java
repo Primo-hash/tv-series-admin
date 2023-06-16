@@ -15,10 +15,9 @@ import static org.hamcrest.Matchers.*;
 
 @DataMongoTest
 @ExtendWith(SpringExtension.class)
-public class MongoDbIntegrationTest {
-
-    @DisplayName("Check that key/value document is saved, when save request is issued to MongoDB")
+public class MongoDbIntegrationTests {
     @Test
+    @DisplayName("Check that key/value document is saved, when save request is issued to MongoDB")
     public void test(@Autowired MongoTemplate mongoTemplate) {
         DBObject documentToSave = BasicDBObjectBuilder.start()
                 .add("key", "testValue")
