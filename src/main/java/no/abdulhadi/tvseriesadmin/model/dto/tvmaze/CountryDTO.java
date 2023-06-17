@@ -14,9 +14,9 @@ import lombok.ToString;
 })
 public class CountryDTO {
     @JsonProperty("name")
-    public String name;
+    private String name;
     @JsonProperty("code")
-    public String code;
+    private String code;
     @JsonProperty("timezone")
-    public String timezone;
+    private String timezone;
 }

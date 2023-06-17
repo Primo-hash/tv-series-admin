@@ -2,6 +2,7 @@ package no.abdulhadi.tvseriesadmin.service.external.api.tvmaze;
 
 import no.abdulhadi.tvseriesadmin.exception.InjectorException;
 import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowDTO;
+import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowEmbedEpisodesDTO;
 import no.abdulhadi.tvseriesadmin.service.external.api.WebFluxConfiguration;
 import no.abdulhadi.tvseriesadmin.service.injector.DTOInjector;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class ShowService {
     private static final int BACKOFF_DURATION_MILLISECONDS = 1500;
 
 
-    public static <T extends ShowDTO> ShowDTO getShowWithEmbed(String showName, String embed, Class<T> dtoClass) {
+    public static ShowEmbedEpisodesDTO getShowWithEmbed(String showName, String embed) {
         WebClient client = WebClient.builder()
                 .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(WebFluxConfiguration.MAX_WEB_BUFFER_SIZE))
                 .baseUrl(EndpointEnum.BASE.uri)
@@ -35,12 +36,12 @@ public class ShowService {
                 .block();
 
         try {
-            return DTOInjector.getDTOFromJSON(res, dtoClass);
+            return DTOInjector.getDTOFromJSON(res, ShowEmbedEpisodesDTO.class);
         } catch (InjectorException e) {
             e.printStackTrace();
         }
 
-        return new ShowDTO();
+        return new ShowEmbedEpisodesDTO();
     }
 
     private static String quoteWrap(String s) {

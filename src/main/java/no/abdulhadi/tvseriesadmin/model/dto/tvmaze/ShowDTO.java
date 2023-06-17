@@ -39,49 +39,49 @@ import java.util.List;
 public class ShowDTO {
     @Id
     @JsonProperty("id")
-    public Integer id;
+    private Integer id;
     @JsonProperty("url")
-    public String url;
+    private String url;
     @JsonProperty("name")
-    public String name;
+    private String name;
     @JsonProperty("type")
-    public String type;
+    private String type;
     @JsonProperty("language")
-    public String language;
+    private String language;
     @JsonProperty("genres")
-    public List<String> genres;
+    private List<String> genres;
     @JsonProperty("status")
-    public String status;
+    private String status;
     @JsonProperty("runtime")
-    public Integer runtime;
+    private Integer runtime;
     @JsonProperty("averageRuntime")
-    public Integer averageRuntime;
+    private Integer averageRuntime;
     @JsonProperty("premiered")
-    public String premiered;
+    private String premiered;
     @JsonProperty("ended")
-    public String ended;
+    private String ended;
     @JsonProperty("officialSite")
-    public String officialSite;
+    private String officialSite;
     @JsonProperty("schedule")
-    public ScheduleDTO schedule;
+    private ScheduleDTO schedule;
     @JsonProperty("rating")
-    public RatingDTO rating;
+    private RatingDTO rating;
     @JsonProperty("weight")
-    public Integer weight;
+    private Integer weight;
     @JsonProperty("network")
-    public NetworkDTO network;
+    private NetworkDTO network;
     @JsonProperty("webChannel")
-    public Object webChannel;
+    private Object webChannel;
     @JsonProperty("dvdCountry")
-    public Object dvdCountry;
+    private Object dvdCountry;
     @JsonProperty("externals")
-    public ExternalsDTO externals;
+    private ExternalsDTO externals;
     @JsonProperty("image")
-    public ImageDTO image;
+    private ImageDTO image;
     @JsonProperty("summary")
-    public String summary;
+    private String summary;
     @JsonProperty("updated")
-    public Integer updated;
+    private Integer updated;
     @JsonProperty("_links")
-    public ShowLinksDTO links;
+    private ShowLinksDTO links;
 }

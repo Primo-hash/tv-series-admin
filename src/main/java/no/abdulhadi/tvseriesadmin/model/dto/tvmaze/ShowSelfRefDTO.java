@@ -12,5 +12,5 @@ import lombok.ToString;
 })
 public class ShowSelfRefDTO {
     @JsonProperty("href")
-    public String href;
+    private String href;
 }

@@ -4,8 +4,10 @@ import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.EpisodeDTO;
 import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowDTO;
 import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowEmbedEpisodesDTO;
+import no.abdulhadi.tvseriesadmin.repository.EpisodeRepository;
 import no.abdulhadi.tvseriesadmin.repository.ShowRepository;
 import no.abdulhadi.tvseriesadmin.service.BeanUtil;
 import no.abdulhadi.tvseriesadmin.service.TxtFileParser;
@@ -20,6 +22,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
@@ -27,7 +30,8 @@ import java.util.ArrayList;
 @Setter
 public class TVMazeToDBPopulator {
 
-    private final ShowRepository repository = BeanUtil.getBean(ShowRepository.class);
+    private final ShowRepository showRepository = BeanUtil.getBean(ShowRepository.class);
+    private final EpisodeRepository episodeRepository = BeanUtil.getBean(EpisodeRepository.class);
     private final static String embeddedOption = "episodes";
 
     @Value("${tvmaze.config.file}")
@@ -40,12 +44,24 @@ public class TVMazeToDBPopulator {
     @PostConstruct
     public void runStartupRoutine() {
         ArrayList<String> showNames = getFileLines();
-        ArrayList<ShowDTO> shows = new ArrayList<>(
+        ArrayList<ShowEmbedEpisodesDTO> shows = populateDatabaseWithShows(showNames);
+        populateDatabaseWithEpisodes(shows);
+    }
+
+    private ArrayList<ShowEmbedEpisodesDTO> populateDatabaseWithShows(ArrayList<String> showNames) {
+        ArrayList<ShowEmbedEpisodesDTO> shows =
                 showNames.stream()
-                        .map(showName -> ShowService.getShowWithEmbed(showName, embeddedOption, ShowEmbedEpisodesDTO.class))
-                        .toList()
-        );
-        repository.saveAll(shows);
+                        .map(showName -> ShowService.getShowWithEmbed(showName, embeddedOption))
+                        .collect(Collectors.toCollection(ArrayList::new));
+        showRepository.saveAll(shows);
+        return shows;
+    }
+
+    private void populateDatabaseWithEpisodes(ArrayList<ShowEmbedEpisodesDTO> shows) {
+        ArrayList<EpisodeDTO> episodes = shows.stream()
+                .flatMap(show -> show.getEmbedded().getEpisodes().stream())
+                .collect(Collectors.toCollection(ArrayList::new));
+        episodeRepository.saveAll(episodes);
     }
 
     public ArrayList<String> getFileLines() {

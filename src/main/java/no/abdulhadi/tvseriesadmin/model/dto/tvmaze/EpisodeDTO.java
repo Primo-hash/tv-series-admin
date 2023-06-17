@@ -29,31 +29,31 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class EpisodeDTO {
     @Id
     @JsonProperty("id")
-    public Integer id;
+    private Integer id;
     @JsonProperty("url")
-    public String url;
+    private String url;
     @JsonProperty("name")
-    public String name;
+    private String name;
     @JsonProperty("season")
-    public Integer season;
+    private Integer season;
     @JsonProperty("number")
-    public Integer number;
+    private Integer number;
     @JsonProperty("type")
-    public String type;
+    private String type;
     @JsonProperty("airdate")
-    public String airdate;
+    private String airdate;
     @JsonProperty("airtime")
-    public String airtime;
+    private String airtime;
     @JsonProperty("airstamp")
-    public String airstamp;
+    private String airstamp;
     @JsonProperty("runtime")
-    public Integer runtime;
+    private Integer runtime;
     @JsonProperty("rating")
-    public RatingDTO rating;
+    private RatingDTO rating;
     @JsonProperty("image")
-    public ImageDTO image;
+    private ImageDTO image;
     @JsonProperty("summary")
-    public String summary;
+    private String summary;
     @JsonProperty("_links")
-    public EpisodeLinksDTO links;
+    private EpisodeLinksDTO links;
 }

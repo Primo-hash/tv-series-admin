@@ -13,7 +13,7 @@ import lombok.ToString;
 })
 public class ImageDTO {
     @JsonProperty("medium")
-    public String medium;
+    private String medium;
     @JsonProperty("original")
-    public String original;
+    private String original;
 }

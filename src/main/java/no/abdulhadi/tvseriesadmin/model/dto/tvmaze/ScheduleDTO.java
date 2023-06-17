@@ -14,7 +14,7 @@ import java.util.List;
 })
 public class ScheduleDTO {
     @JsonProperty("time")
-    public String time;
+    private String time;
     @JsonProperty("days")
-    public List<String> days;
+    private List<String> days;
 }

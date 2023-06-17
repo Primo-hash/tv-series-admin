@@ -35,5 +35,5 @@ import lombok.ToString;
 })
 public class ShowEmbedEpisodesDTO extends ShowDTO {
     @JsonProperty("_embedded")
-    public EmbeddedEpisodesDTO embedded;
+    private EmbeddedEpisodesDTO embedded;
 }

@@ -13,7 +13,7 @@ import lombok.ToString;
 })
 public class EpisodeLinksDTO {
     @JsonProperty("self")
-    public SelfDTO self;
+    private SelfDTO self;
     @JsonProperty("show")
-    public ShowSelfRefDTO show;
+    private ShowSelfRefDTO show;
 }

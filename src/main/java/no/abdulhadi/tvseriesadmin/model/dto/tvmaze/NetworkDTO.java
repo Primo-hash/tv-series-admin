@@ -13,11 +13,11 @@ import lombok.Getter;
 })
 public class NetworkDTO {
     @JsonProperty("id")
-    public Integer id;
+    private Integer id;
     @JsonProperty("name")
-    public String name;
+    private String name;
     @JsonProperty("country")
-    public CountryDTO country;
+    private CountryDTO country;
     @JsonProperty("officialSite")
-    public Object officialSite;
+    private Object officialSite;
 }

@@ -13,5 +13,5 @@ import lombok.ToString;
 })
 public class NextEpisodeDTO {
     @JsonProperty("href")
-    public String href;
+    private String href;
 }

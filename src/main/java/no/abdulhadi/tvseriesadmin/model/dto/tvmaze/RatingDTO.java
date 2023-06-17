@@ -12,5 +12,5 @@ import lombok.ToString;
 })
 public class RatingDTO {
     @JsonProperty("average")
-    public Double average;
+    private Double average;
 }

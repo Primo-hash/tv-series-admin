@@ -13,5 +13,5 @@ import java.util.List;
 })
 public class EmbeddedEpisodesDTO {
     @JsonProperty("episodes")
-    public List<EpisodeDTO> episodes;
+    private List<EpisodeDTO> episodes;
 }

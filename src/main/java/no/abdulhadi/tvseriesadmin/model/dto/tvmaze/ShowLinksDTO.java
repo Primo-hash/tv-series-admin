@@ -14,9 +14,9 @@ import lombok.ToString;
 public class ShowLinksDTO {
 
     @JsonProperty("self")
-    public SelfDTO self;
+    private SelfDTO self;
     @JsonProperty("previousepisode")
-    public PreviousEpisodeDTO previousEpisode;
+    private PreviousEpisodeDTO previousEpisode;
     @JsonProperty("nextepisode")
-    public NextEpisodeDTO nextepisode;
+    private NextEpisodeDTO nextepisode;
 }

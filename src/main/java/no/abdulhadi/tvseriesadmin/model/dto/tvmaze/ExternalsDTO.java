@@ -14,9 +14,9 @@ import lombok.ToString;
 })
 public class ExternalsDTO {
     @JsonProperty("tvrage")
-    public Integer tvrage;
+    private Integer tvrage;
     @JsonProperty("thetvdb")
-    public Integer thetvdb;
+    private Integer thetvdb;
     @JsonProperty("imdb")
-    public String imdb;
+    private String imdb;
 }
