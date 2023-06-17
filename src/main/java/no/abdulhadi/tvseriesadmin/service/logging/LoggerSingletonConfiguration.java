@@ -1,4 +1,4 @@
-package no.abdulhadi.tvseriesadmin.util.logging;
+package no.abdulhadi.tvseriesadmin.service.logging;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;

@@ -1,15 +1,11 @@
 package no.abdulhadi.tvseriesadmin;
 
-import no.abdulhadi.tvseriesadmin.util.startup.TVMazeToDBPopulator;
-import org.assertj.core.util.Strings;
+import no.abdulhadi.tvseriesadmin.service.startup.TVMazeToDBPopulator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;

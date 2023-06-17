@@ -1,39 +1,37 @@
-
 package no.abdulhadi.tvseriesadmin.model.dto.show_embed_episodes;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.Getter;
 
 import java.util.List;
-
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@Getter
 @JsonPropertyOrder({
-    "id",
-    "url",
-    "name",
-    "type",
-    "language",
-    "genres",
-    "status",
-    "runtime",
-    "averageRuntime",
-    "premiered",
-    "ended",
-    "officialSite",
-    "schedule",
-    "rating",
-    "weight",
-    "network",
-    "webChannel",
-    "dvdCountry",
-    "externals",
-    "image",
-    "summary",
-    "updated",
-    "_links",
-    "_embedded"
+        "id",
+        "url",
+        "name",
+        "type",
+        "language",
+        "genres",
+        "status",
+        "runtime",
+        "averageRuntime",
+        "premiered",
+        "ended",
+        "officialSite",
+        "schedule",
+        "rating",
+        "weight",
+        "network",
+        "webChannel",
+        "dvdCountry",
+        "externals",
+        "image",
+        "summary",
+        "updated",
+        "_links",
 })
 public class ShowDTO {
-
     @JsonProperty("id")
     public Integer id;
     @JsonProperty("url")
@@ -80,6 +78,4 @@ public class ShowDTO {
     public Integer updated;
     @JsonProperty("_links")
     public ShowLinksDTO links;
-    @JsonProperty("_embedded")
-    public EmbeddedDTO embedded;
 }

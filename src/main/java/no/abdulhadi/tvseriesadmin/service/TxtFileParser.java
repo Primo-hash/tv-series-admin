@@ -1,4 +1,4 @@
-package no.abdulhadi.tvseriesadmin.util;
+package no.abdulhadi.tvseriesadmin.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -2,8 +2,9 @@
 package no.abdulhadi.tvseriesadmin.model.dto.show_embed_episodes;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.Getter;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@Getter
 @JsonPropertyOrder({
     "average"
 })

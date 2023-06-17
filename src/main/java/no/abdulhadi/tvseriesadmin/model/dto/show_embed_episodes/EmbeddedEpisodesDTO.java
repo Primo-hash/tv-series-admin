@@ -5,11 +5,10 @@ import com.fasterxml.jackson.annotation.*;
 
 import java.util.List;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "episodes"
 })
-public class EmbeddedDTO {
+public class EmbeddedEpisodesDTO {
     @JsonProperty("episodes")
     public List<EpisodeDTO> episodes;
 }
