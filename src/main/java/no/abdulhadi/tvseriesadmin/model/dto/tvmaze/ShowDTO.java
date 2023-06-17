@@ -1,11 +1,15 @@
-package no.abdulhadi.tvseriesadmin.model.dto.show_embed_episodes;
+package no.abdulhadi.tvseriesadmin.model.dto.tvmaze;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
+import lombok.ToString;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 @Getter
+@ToString
 @JsonPropertyOrder({
         "id",
         "url",
@@ -31,7 +35,9 @@ import java.util.List;
         "updated",
         "_links",
 })
+@Document( collection = "shows")
 public class ShowDTO {
+    @Id
     @JsonProperty("id")
     public Integer id;
     @JsonProperty("url")

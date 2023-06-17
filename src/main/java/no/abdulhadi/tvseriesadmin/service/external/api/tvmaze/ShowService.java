@@ -1,8 +1,7 @@
 package no.abdulhadi.tvseriesadmin.service.external.api.tvmaze;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import no.abdulhadi.tvseriesadmin.exception.InjectorException;
-import no.abdulhadi.tvseriesadmin.model.dto.show_embed_episodes.ShowDTO;
+import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowDTO;
 import no.abdulhadi.tvseriesadmin.service.external.api.WebFluxConfiguration;
 import no.abdulhadi.tvseriesadmin.service.injector.DTOInjector;
 import org.springframework.stereotype.Service;
@@ -10,7 +9,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.util.retry.Retry;
 
 import java.time.Duration;
-import java.util.ArrayList;
 
 @Service
 public class ShowService {
