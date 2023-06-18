@@ -7,6 +7,7 @@ import lombok.Setter;
 import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.EpisodeDTO;
 import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowDTO;
 import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowEmbedEpisodesDTO;
+import no.abdulhadi.tvseriesadmin.model.report.Top10ShowsReport;
 import no.abdulhadi.tvseriesadmin.repository.EpisodeRepository;
 import no.abdulhadi.tvseriesadmin.repository.ShowRepository;
 import no.abdulhadi.tvseriesadmin.service.BeanUtil;
