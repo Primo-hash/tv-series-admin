@@ -30,7 +30,7 @@ public class Top10ShowsReport extends Report {
         for (int i = 0; i < topTenShows.size(); i++) {
             report.append(i+1).append(". ").append(topTenShows.get(i).getName()).append("\n");
         }
-        return report.toString();
+        return report.toString().trim();
     }
 
 }
