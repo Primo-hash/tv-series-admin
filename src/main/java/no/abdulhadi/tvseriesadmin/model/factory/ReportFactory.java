@@ -1,8 +1,12 @@
 package no.abdulhadi.tvseriesadmin.model.factory;
 
-import org.springframework.stereotype.Service;
+import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowDTO;
+import no.abdulhadi.tvseriesadmin.model.report.ReportEnum;
+import no.abdulhadi.tvseriesadmin.model.report.Reportable;
 
-@Service
-public class ReportFactory {
+import java.util.List;
 
+public abstract class ReportFactory {
+    public abstract <T extends ShowDTO> Reportable getReport(ReportEnum reportType, List<T> items);
+    public abstract Reportable getReport(ReportEnum reportType);
 }

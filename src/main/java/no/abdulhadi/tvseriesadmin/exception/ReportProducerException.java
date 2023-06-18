@@ -1,10 +1,10 @@
 package no.abdulhadi.tvseriesadmin.exception;
 
-public class InjectorException extends RuntimeException {
+public class ReportProducerException extends RuntimeException {
 
     private final String message;
 
-    public InjectorException(String message) {
+    public ReportProducerException(String message) {
         this.message = message;
     }
 

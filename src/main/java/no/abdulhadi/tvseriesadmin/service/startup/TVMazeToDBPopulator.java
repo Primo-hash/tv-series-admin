@@ -5,17 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.EpisodeDTO;
-import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowDTO;
 import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowEmbedEpisodesDTO;
-import no.abdulhadi.tvseriesadmin.model.report.Top10ShowsReport;
 import no.abdulhadi.tvseriesadmin.repository.EpisodeRepository;
 import no.abdulhadi.tvseriesadmin.repository.ShowRepository;
 import no.abdulhadi.tvseriesadmin.service.BeanUtil;
 import no.abdulhadi.tvseriesadmin.service.TxtFileParser;
 import no.abdulhadi.tvseriesadmin.service.external.api.tvmaze.ShowService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 

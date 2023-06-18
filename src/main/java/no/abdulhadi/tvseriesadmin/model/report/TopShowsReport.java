@@ -1,28 +1,28 @@
 package no.abdulhadi.tvseriesadmin.model.report;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NonNull;
 import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowDTO;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-public class Top10ShowsReport extends Report {
-    private static final int MAX_SHOWS = 10;
+public class TopShowsReport implements Reportable {
+    private final int TOP_SHOWS_COUNT;
     private List<ShowDTO> topTenShows;
 
-    public <T extends ShowDTO> Top10ShowsReport(List<T> shows) {
+    public <T extends ShowDTO> TopShowsReport(List<T> shows, int topShowsCount) {
+        this.TOP_SHOWS_COUNT = topShowsCount;
         generateReport(shows);
     }
 
     public <T extends ShowDTO> void generateReport(List<T> shows) {
         topTenShows = shows.stream()
                 .filter(show -> show.getRating().getAverage() != null)
-                .sorted(Comparator.comparing(show -> show.getRating().getAverage()))
-                .limit(MAX_SHOWS)
+                .sorted(Comparator.comparing((ShowDTO show) -> show.getRating().getAverage()).reversed())
+                .limit(TOP_SHOWS_COUNT)
                 .collect(Collectors.toList());
+        System.out.println("df");
     }
 
     public String toStringReport() {

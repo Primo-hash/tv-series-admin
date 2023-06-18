@@ -21,14 +21,14 @@ public class ShowService {
     public static ShowEmbedEpisodesDTO getShowWithEmbed(String showName, String embed) {
         WebClient client = WebClient.builder()
                 .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(WebFluxConfiguration.MAX_WEB_BUFFER_SIZE))
-                .baseUrl(EndpointEnum.BASE.uri)
+                .baseUrl(EndpointEnum.BASE.getUri())
                 .build();
 
         String res = client.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path(EndpointEnum.SINGLE_SHOW.uri)
-                        .queryParam(ParameterEnum.QUERY.param, showName)
-                        .queryParam(ParameterEnum.EMBED.param, embed)
+                        .path(EndpointEnum.SINGLE_SHOW.getUri())
+                        .queryParam(ParameterEnum.QUERY.getParam(), showName)
+                        .queryParam(ParameterEnum.EMBED.getParam(), embed)
                         .build())
                 .retrieve()
                 .bodyToMono(String.class)
