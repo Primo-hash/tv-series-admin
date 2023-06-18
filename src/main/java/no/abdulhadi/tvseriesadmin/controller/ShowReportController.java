@@ -37,4 +37,11 @@ public class ShowReportController {
         }
         return report.toStringReport();
     }
+
+    @GetMapping("/reports/top10shows.txt")
+    public String getTopTenShowsTxtFile(HttpServletResponse response){
+        String fileName = "top10shows.txt";
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+        return getTopTenShows(response);
+    }
 }
