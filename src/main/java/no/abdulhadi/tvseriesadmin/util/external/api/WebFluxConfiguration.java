@@ -1,4 +1,4 @@
-package no.abdulhadi.tvseriesadmin.service.external.api;
+package no.abdulhadi.tvseriesadmin.util.external.api;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.codec.ServerCodecConfigurer;

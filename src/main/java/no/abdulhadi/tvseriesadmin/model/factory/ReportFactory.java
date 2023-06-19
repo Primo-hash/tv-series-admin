@@ -8,5 +8,4 @@ import java.util.List;
 
 public abstract class ReportFactory {
     public abstract <T extends ShowDTO> Reportable getReport(ReportEnum reportType, List<T> items);
-    public abstract Reportable getReport(ReportEnum reportType);
 }

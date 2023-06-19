@@ -1,6 +1,6 @@
 package no.abdulhadi.tvseriesadmin;
 
-import no.abdulhadi.tvseriesadmin.service.startup.TVMazeToDBPopulator;
+import no.abdulhadi.tvseriesadmin.util.startup.TVMazeToDBPopulator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -85,4 +85,6 @@ public class ShowDTO {
     private Integer updated;
     @JsonProperty("_links")
     private ShowLinksDTO links;
+    @JsonProperty("_embedded")
+    private EmbeddedEpisodesDTO embedded;
 }

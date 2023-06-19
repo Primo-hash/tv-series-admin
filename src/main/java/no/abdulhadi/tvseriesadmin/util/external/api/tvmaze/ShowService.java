@@ -1,10 +1,9 @@
-package no.abdulhadi.tvseriesadmin.service.external.api.tvmaze;
+package no.abdulhadi.tvseriesadmin.util.external.api.tvmaze;
 
 import no.abdulhadi.tvseriesadmin.exception.InjectorException;
 import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowDTO;
-import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowEmbedEpisodesDTO;
-import no.abdulhadi.tvseriesadmin.service.external.api.WebFluxConfiguration;
-import no.abdulhadi.tvseriesadmin.service.injector.DTOInjector;
+import no.abdulhadi.tvseriesadmin.util.external.api.WebFluxConfiguration;
+import no.abdulhadi.tvseriesadmin.util.injector.DTOInjector;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.util.retry.Retry;
@@ -18,7 +17,7 @@ public class ShowService {
     private static final int BACKOFF_DURATION_MILLISECONDS = 1500;
 
 
-    public static ShowEmbedEpisodesDTO getShowWithEmbed(String showName, String embed) {
+    public static ShowDTO getShow(String showName, String embed) {
         WebClient client = WebClient.builder()
                 .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(WebFluxConfiguration.MAX_WEB_BUFFER_SIZE))
                 .baseUrl(EndpointEnum.BASE.getUri())
@@ -36,12 +35,12 @@ public class ShowService {
                 .block();
 
         try {
-            return DTOInjector.getDTOFromJSON(res, ShowEmbedEpisodesDTO.class);
+            return DTOInjector.getDTOFromJSON(res, ShowDTO.class);
         } catch (InjectorException e) {
             e.printStackTrace();
         }
 
-        return new ShowEmbedEpisodesDTO();
+        return new ShowDTO();
     }
 
     private static String quoteWrap(String s) {

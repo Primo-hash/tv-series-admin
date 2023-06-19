@@ -7,6 +7,8 @@ import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Getter
 @ToString
 @JsonPropertyOrder({
@@ -41,11 +43,11 @@ public class EpisodeDTO {
     @JsonProperty("type")
     private String type;
     @JsonProperty("airdate")
-    private String airdate;
+    private Date airdate;
     @JsonProperty("airtime")
     private String airtime;
     @JsonProperty("airstamp")
-    private String airstamp;
+    private Date airstamp;
     @JsonProperty("runtime")
     private Integer runtime;
     @JsonProperty("rating")

@@ -1,16 +1,17 @@
-package no.abdulhadi.tvseriesadmin.service.startup;
+package no.abdulhadi.tvseriesadmin.util.startup;
 
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.java.Log;
 import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.EpisodeDTO;
-import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowEmbedEpisodesDTO;
+import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowDTO;
 import no.abdulhadi.tvseriesadmin.repository.EpisodeRepository;
 import no.abdulhadi.tvseriesadmin.repository.ShowRepository;
-import no.abdulhadi.tvseriesadmin.service.BeanUtil;
-import no.abdulhadi.tvseriesadmin.service.TxtFileParser;
-import no.abdulhadi.tvseriesadmin.service.external.api.tvmaze.ShowService;
+import no.abdulhadi.tvseriesadmin.util.BeanUtil;
+import no.abdulhadi.tvseriesadmin.util.TxtFileParser;
+import no.abdulhadi.tvseriesadmin.util.external.api.tvmaze.ShowService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
@@ -18,13 +19,18 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
 @Getter
 @Setter
+@Log
 public class TVMazeToDBPopulator {
 
     private final ShowRepository showRepository = BeanUtil.getBean(ShowRepository.class);
@@ -41,20 +47,20 @@ public class TVMazeToDBPopulator {
     @PostConstruct
     public void runStartupRoutine() {
         ArrayList<String> showNames = getFileLines();
-        ArrayList<ShowEmbedEpisodesDTO> shows = populateDatabaseWithShows(showNames);
+        ArrayList<ShowDTO> shows = populateDatabaseWithShows(showNames);
         populateDatabaseWithEpisodes(shows);
     }
 
-    private ArrayList<ShowEmbedEpisodesDTO> populateDatabaseWithShows(ArrayList<String> showNames) {
-        ArrayList<ShowEmbedEpisodesDTO> shows =
+    private ArrayList<ShowDTO> populateDatabaseWithShows(ArrayList<String> showNames) {
+        ArrayList<ShowDTO> shows =
                 showNames.stream()
-                        .map(showName -> ShowService.getShowWithEmbed(showName, embeddedOption))
+                        .map(showName -> ShowService.getShow(showName, embeddedOption))
                         .collect(Collectors.toCollection(ArrayList::new));
         showRepository.saveAll(shows);
         return shows;
     }
 
-    private void populateDatabaseWithEpisodes(ArrayList<ShowEmbedEpisodesDTO> shows) {
+    private void populateDatabaseWithEpisodes(ArrayList<ShowDTO> shows) {
         ArrayList<EpisodeDTO> episodes = shows.stream()
                 .flatMap(show -> show.getEmbedded().getEpisodes().stream())
                 .collect(Collectors.toCollection(ArrayList::new));

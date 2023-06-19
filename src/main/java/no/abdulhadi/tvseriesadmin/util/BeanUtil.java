@@ -1,4 +1,4 @@
-package no.abdulhadi.tvseriesadmin.service;
+package no.abdulhadi.tvseriesadmin.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

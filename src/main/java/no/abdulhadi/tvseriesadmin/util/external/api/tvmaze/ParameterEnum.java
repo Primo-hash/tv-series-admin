@@ -1,4 +1,4 @@
-package no.abdulhadi.tvseriesadmin.service.external.api.tvmaze;
+package no.abdulhadi.tvseriesadmin.util.external.api.tvmaze;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

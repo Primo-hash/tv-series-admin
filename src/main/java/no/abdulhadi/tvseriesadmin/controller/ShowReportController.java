@@ -40,8 +40,28 @@ public class ShowReportController {
 
     @GetMapping("/reports/top10shows.txt")
     public String getTopTenShowsTxtFile(HttpServletResponse response){
-        String fileName = "top10shows.txt";
+        String fileName = "top_10_shows.txt";
         response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
         return getTopTenShows(response);
+    }
+
+    @GetMapping("/reports/nextweek")
+    public String getNextWeekShows(HttpServletResponse response){
+        List<ShowDTO> shows = repository.findAll();
+        Reportable report;
+        try {
+            report = FactoryProducer.getReportFactory(FactoryEnum.SHOW_REPORT).getReport(ReportEnum.NEXT_WEEK_SHOWS, shows);
+        } catch (ReportProducerException e) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return "Could not create report";
+        }
+        return report.toStringReport();
+    }
+
+    @GetMapping("/reports/nextweek.txt")
+    public String getNextWeekShowsTxtFile(HttpServletResponse response){
+        String fileName = "next_week.txt";
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+        return getNextWeekShows(response);
     }
 }
