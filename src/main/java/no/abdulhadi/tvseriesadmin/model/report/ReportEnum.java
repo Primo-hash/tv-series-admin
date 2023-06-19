@@ -8,6 +8,7 @@ import lombok.Getter;
 public enum ReportEnum {
     TOP_TEN_SHOWS("Top 10 shows"),
     NEXT_WEEK_SHOWS("Next week's shows"),
+    TOP_NETWORKS("Top networks"),
     INVALID("Invalid report");
 
     private final String name;

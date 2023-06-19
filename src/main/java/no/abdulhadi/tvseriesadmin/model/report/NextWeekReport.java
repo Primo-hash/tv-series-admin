@@ -46,12 +46,7 @@ public class NextWeekReport implements Reportable {
     }
 
     public String toStringReport() {
-        StringBuilder report = new StringBuilder();
-        report.append("SHOW_NAME;MONDAY;TUESDAY;WEDNESDAY;THURSDAY;FRIDAY;SATURDAY;SUNDAY\n");
-
-        formatShowings(report);
-
-        return report.toString().trim();
+        return formatShowings();
     }
 
     private void configureCalendar() {
@@ -60,8 +55,10 @@ public class NextWeekReport implements Reportable {
         calendar.set(Calendar.MINUTE, 0);
     }
 
-    private void formatShowings(StringBuilder report) {
+    private String formatShowings() {
         final HashMap<Integer, String> dayShowings = new HashMap<>();
+        StringBuilder report = new StringBuilder();
+        report.append("SHOW_NAME;MONDAY;TUESDAY;WEDNESDAY;THURSDAY;FRIDAY;SATURDAY;SUNDAY\n");
 
         showsNextWeek.forEach((showName, episodes) -> {
             report.append(showName).append(";");
@@ -78,6 +75,8 @@ public class NextWeekReport implements Reportable {
             report.append(dayShowings.get(Calendar.SATURDAY)).append(";");
             report.append(dayShowings.get(Calendar.SUNDAY)).append("\n");
         });
+
+        return report.toString().trim();
     }
 
     private HashMap<Integer, String> getShowingsByDay(EpisodeDTO episode) {

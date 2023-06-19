@@ -7,7 +7,6 @@ import no.abdulhadi.tvseriesadmin.model.factory.FactoryEnum;
 import no.abdulhadi.tvseriesadmin.model.factory.FactoryProducer;
 import no.abdulhadi.tvseriesadmin.model.report.ReportEnum;
 import no.abdulhadi.tvseriesadmin.model.report.Reportable;
-import no.abdulhadi.tvseriesadmin.model.report.TopShowsReport;
 import no.abdulhadi.tvseriesadmin.repository.ShowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class ShowReportController {
+public class ReportController {
 
     ShowRepository repository;
 
     @Autowired
-    ShowReportController(ShowRepository repository) {
+    ReportController(ShowRepository repository) {
         this.repository = repository;
     };
 
@@ -63,5 +62,25 @@ public class ShowReportController {
         String fileName = "next_week.txt";
         response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
         return getNextWeekShows(response);
+    }
+
+    @GetMapping("/reports/topnetworks")
+    public String getTopNetworks(HttpServletResponse response){
+        List<ShowDTO> shows = repository.findAll();
+        Reportable report;
+        try {
+            report = FactoryProducer.getReportFactory(FactoryEnum.SHOW_REPORT).getReport(ReportEnum.TOP_NETWORKS, shows);
+        } catch (ReportProducerException e) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return "Could not create report";
+        }
+        return report.toStringReport();
+    }
+
+    @GetMapping("/reports/topnetworks.txt")
+    public String getTopNetworksTxtFile(HttpServletResponse response){
+        String fileName = "top_networks.txt";
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+        return getTopNetworks(response);
     }
 }

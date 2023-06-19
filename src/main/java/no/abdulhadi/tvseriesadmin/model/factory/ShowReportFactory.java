@@ -2,10 +2,7 @@ package no.abdulhadi.tvseriesadmin.model.factory;
 
 import no.abdulhadi.tvseriesadmin.exception.ReportProducerException;
 import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowDTO;
-import no.abdulhadi.tvseriesadmin.model.report.NextWeekReport;
-import no.abdulhadi.tvseriesadmin.model.report.ReportEnum;
-import no.abdulhadi.tvseriesadmin.model.report.Reportable;
-import no.abdulhadi.tvseriesadmin.model.report.TopShowsReport;
+import no.abdulhadi.tvseriesadmin.model.report.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +18,9 @@ public class ShowReportFactory extends ReportFactory {
             }
             case NEXT_WEEK_SHOWS -> {
                 return new NextWeekReport(shows);
+            }
+            case TOP_NETWORKS -> {
+                return new TopNetworksReport(shows);
             }
             default -> throw new ReportProducerException("Invalid report choice: " + reportType.getName());
         }
