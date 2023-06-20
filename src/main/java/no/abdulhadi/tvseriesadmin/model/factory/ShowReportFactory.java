@@ -22,6 +22,9 @@ public class ShowReportFactory extends ReportFactory {
             case TOP_NETWORKS -> {
                 return new TopNetworksReport(shows);
             }
+            case ALL_SHOWS -> {
+                return new AllShowsReport(shows);
+            }
             default -> throw new ReportProducerException("Invalid report choice: " + reportType.getName());
         }
     }

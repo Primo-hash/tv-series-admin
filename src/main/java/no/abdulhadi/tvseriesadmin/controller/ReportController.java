@@ -83,4 +83,24 @@ public class ReportController {
         response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
         return getTopNetworks(response);
     }
+
+    @GetMapping("/reports/allshows")
+    public String getAllShows(HttpServletResponse response){
+        List<ShowDTO> shows = repository.findAll();
+        Reportable report;
+        try {
+            report = FactoryProducer.getReportFactory(FactoryEnum.SHOW_REPORT).getReport(ReportEnum.ALL_SHOWS, shows);
+        } catch (ReportProducerException e) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return "Could not create report";
+        }
+        return report.toStringReport();
+    }
+
+    @GetMapping("/reports/allshows.txt")
+    public String getAllShowsTxtFile(HttpServletResponse response){
+        String fileName = "all_shows.txt";
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+        return getAllShows(response);
+    }
 }
