@@ -27,13 +27,8 @@ public class ReportController {
     @GetMapping("/reports/top10shows")
     public String getTopTenShows(HttpServletResponse response){
         List<ShowDTO> shows = repository.findAll();
-        Reportable report;
-        try {
-            report = FactoryProducer.getReportFactory(FactoryEnum.SHOW_REPORT).getReport(ReportEnum.TOP_TEN_SHOWS, shows);
-        } catch (ReportProducerException e) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return "Could not create report";
-        }
+        Reportable report = getReport(ReportEnum.TOP_TEN_SHOWS, shows, response);
+        if (report == null) return "Could not create report";
         return report.toStringReport();
     }
 
@@ -47,13 +42,8 @@ public class ReportController {
     @GetMapping("/reports/nextweek")
     public String getNextWeekShows(HttpServletResponse response){
         List<ShowDTO> shows = repository.findAll();
-        Reportable report;
-        try {
-            report = FactoryProducer.getReportFactory(FactoryEnum.SHOW_REPORT).getReport(ReportEnum.NEXT_WEEK_SHOWS, shows);
-        } catch (ReportProducerException e) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return "Could not create report";
-        }
+        Reportable report = getReport(ReportEnum.NEXT_WEEK_SHOWS, shows, response);
+        if (report == null) return "Could not create report";
         return report.toStringReport();
     }
 
@@ -67,13 +57,8 @@ public class ReportController {
     @GetMapping("/reports/topnetworks")
     public String getTopNetworks(HttpServletResponse response){
         List<ShowDTO> shows = repository.findAll();
-        Reportable report;
-        try {
-            report = FactoryProducer.getReportFactory(FactoryEnum.SHOW_REPORT).getReport(ReportEnum.TOP_NETWORKS, shows);
-        } catch (ReportProducerException e) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return "Could not create report";
-        }
+        Reportable report = getReport(ReportEnum.TOP_NETWORKS, shows, response);
+        if (report == null) return "Could not create report";
         return report.toStringReport();
     }
 
@@ -87,13 +72,8 @@ public class ReportController {
     @GetMapping("/reports/allshows")
     public String getAllShows(HttpServletResponse response){
         List<ShowDTO> shows = repository.findAll();
-        Reportable report;
-        try {
-            report = FactoryProducer.getReportFactory(FactoryEnum.SHOW_REPORT).getReport(ReportEnum.ALL_SHOWS, shows);
-        } catch (ReportProducerException e) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return "Could not create report";
-        }
+        Reportable report = getReport(ReportEnum.ALL_SHOWS, shows, response);
+        if (report == null) return "Could not create report";
         return report.toStringReport();
     }
 
@@ -102,5 +82,31 @@ public class ReportController {
         String fileName = "all_shows.txt";
         response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
         return getAllShows(response);
+    }
+
+    @GetMapping("/reports/bestepisodes")
+    public String getBestEpisodes(HttpServletResponse response){
+        List<ShowDTO> shows = repository.findAll();
+        Reportable report = getReport(ReportEnum.BEST_EPISODES, shows, response);
+        if (report == null) return "Could not create report";
+        return report.toStringReport();
+    }
+
+    @GetMapping("/reports/bestepisodes.txt")
+    public String getBestEpisodesTxtFile(HttpServletResponse response){
+        String fileName = "best_episodes.txt";
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+        return getBestEpisodes(response);
+    }
+
+    private static Reportable getReport(ReportEnum bestEpisodes, List<ShowDTO> shows, HttpServletResponse response) {
+        Reportable report;
+        try {
+            report = FactoryProducer.getReportFactory(FactoryEnum.SHOW_REPORT).getReport(bestEpisodes, shows);
+        } catch (ReportProducerException e) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return null;
+        }
+        return report;
     }
 }

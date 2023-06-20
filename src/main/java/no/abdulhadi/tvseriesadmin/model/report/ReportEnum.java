@@ -10,6 +10,7 @@ public enum ReportEnum {
     NEXT_WEEK_SHOWS("Next week's shows"),
     TOP_NETWORKS("Top networks"),
     ALL_SHOWS("All registered shows"),
+    BEST_EPISODES("Best episodes from each show"),
     INVALID("Invalid report");
 
     private final String name;

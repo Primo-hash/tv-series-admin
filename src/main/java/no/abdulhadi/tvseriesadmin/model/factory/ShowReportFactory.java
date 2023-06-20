@@ -25,6 +25,9 @@ public class ShowReportFactory extends ReportFactory {
             case ALL_SHOWS -> {
                 return new AllShowsReport(shows);
             }
+            case BEST_EPISODES -> {
+                return new BestRatedEpisodeReport(shows);
+            }
             default -> throw new ReportProducerException("Invalid report choice: " + reportType.getName());
         }
     }

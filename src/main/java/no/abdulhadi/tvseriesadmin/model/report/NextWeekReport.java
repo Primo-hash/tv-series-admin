@@ -18,7 +18,6 @@ public class NextWeekReport implements Reportable {
     }
 
     public <T extends ShowDTO> void generateReport(List<T> shows) {
-        HashMap<String, List<EpisodeDTO>> showsNextWeek = new HashMap<>();
 
         configureCalendar();
 
@@ -28,9 +27,14 @@ public class NextWeekReport implements Reportable {
         calendar.add(Calendar.DATE, 6);
         Date endDateNextWeek = calendar.getTime();
 
+        this.showsNextWeek = mapSchedule(shows, startDateNextWeek, endDateNextWeek);;
+    }
+
+    private <T extends ShowDTO> HashMap<String, List<EpisodeDTO>> mapSchedule(List<T> shows, Date startDateNextWeek, Date endDateNextWeek) {
+        HashMap<String, List<EpisodeDTO>> showsNextWeek = new HashMap<>();
+
         for (ShowDTO show : shows) {
             List<EpisodeDTO> episodesNextWeek = new ArrayList<>();
-            // methodize
             for (EpisodeDTO episode : show.getEmbedded().getEpisodes()) {
                 Date airdate = episode.getAirdate();
                 if (airdate.after(startDateNextWeek) && airdate.before(endDateNextWeek)) {
@@ -41,8 +45,7 @@ public class NextWeekReport implements Reportable {
                 showsNextWeek.put(show.getName(), episodesNextWeek);
             }
         }
-
-        this.showsNextWeek = showsNextWeek;
+        return showsNextWeek;
     }
 
     public String toStringReport() {
