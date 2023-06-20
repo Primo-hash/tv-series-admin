@@ -28,7 +28,12 @@ public class TopShowsReport implements Reportable {
     public String toStringReport() {
         StringBuilder report = new StringBuilder();
         for (int i = 0; i < topTenShows.size(); i++) {
-            report.append(i+1).append(". ").append(topTenShows.get(i).getName()).append("\n");
+            report.append(topTenShows.get(i).getName());
+            if (i == topTenShows.size() - 1) {
+                report.append("\n");
+            } else {
+                report.append(";");
+            }
         }
         return report.toString().trim();
     }
