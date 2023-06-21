@@ -9,7 +9,10 @@ import no.abdulhadi.tvseriesadmin.model.report.ReportEnum;
 import no.abdulhadi.tvseriesadmin.model.report.Reportable;
 import no.abdulhadi.tvseriesadmin.repository.ShowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -99,10 +102,36 @@ public class ReportController {
         return getBestEpisodes(response);
     }
 
-    private static Reportable getReport(ReportEnum bestEpisodes, List<ShowDTO> shows, HttpServletResponse response) {
+    @PostMapping("/reports/recommendedshows")
+    public String postRecommendedShows(@RequestBody String filters, HttpServletResponse response){
+        List<ShowDTO> shows = repository.findAll();
+        Reportable report = getParameterizedReport(ReportEnum.RECOMMENDED_SHOWS, shows, filters, response);
+        if (report == null) return "Could not create report";
+        return report.toStringReport();
+    }
+
+    @PostMapping("/reports/recommendedshows.txt")
+    public String postRecommendedShowsTxtFile(@RequestBody String filters, HttpServletResponse response){
+        String fileName = "best_episodes.txt";
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+        return postRecommendedShows(filters, response);
+    }
+
+    private static Reportable getReport(ReportEnum reportType, List<ShowDTO> shows, HttpServletResponse response) {
         Reportable report;
         try {
-            report = FactoryProducer.getReportFactory(FactoryEnum.SHOW_REPORT).getReport(bestEpisodes, shows);
+            report = FactoryProducer.getReportFactory(FactoryEnum.SHOW_REPORT).getReport(reportType, shows);
+        } catch (ReportProducerException e) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return null;
+        }
+        return report;
+    }
+
+    private static Reportable getParameterizedReport(ReportEnum reportType, List<ShowDTO> shows, String parameters, HttpServletResponse response) {
+        Reportable report;
+        try {
+            report = FactoryProducer.getReportFactory(FactoryEnum.SHOW_REPORT).getParameterizedReport(reportType, shows, parameters);
         } catch (ReportProducerException e) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return null;

@@ -10,7 +10,12 @@ import lombok.ToString;
 @JsonPropertyOrder({
     "average"
 })
-public class RatingDTO {
+public class RatingDTO implements Comparable<RatingDTO> {
     @JsonProperty("average")
     private Double average;
+
+    @Override
+    public int compareTo(RatingDTO rating) {
+        return this.average.compareTo(rating.getAverage());
+    }
 }

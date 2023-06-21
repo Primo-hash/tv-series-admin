@@ -38,6 +38,7 @@ public class BestRatedEpisodeReport implements Reportable {
     }
 
     public String toStringReport() {
+
         StringBuilder report = new StringBuilder();
         report.append("SHOW_NAME;NETWORK;GENRES;SEASON_NUMBER;EPISODE_NUMBER;EPISODE_NAME;RATING;\n");
 

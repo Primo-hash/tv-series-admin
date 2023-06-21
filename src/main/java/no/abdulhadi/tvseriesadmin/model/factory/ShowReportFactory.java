@@ -31,4 +31,14 @@ public class ShowReportFactory extends ReportFactory {
             default -> throw new ReportProducerException("Invalid report choice: " + reportType.getName());
         }
     }
+
+    @Override
+    public <T extends ShowDTO> Reportable getParameterizedReport(ReportEnum reportType, List<T> shows, String parameters) {
+        switch (reportType) {
+            case RECOMMENDED_SHOWS -> {
+                return new RecommendedShowsReport(shows, parameters);
+            }
+            default -> throw new ReportProducerException("Invalid report choice: " + reportType.getName());
+        }
+    }
 }

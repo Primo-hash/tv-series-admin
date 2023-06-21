@@ -11,6 +11,7 @@ public enum ReportEnum {
     TOP_NETWORKS("Top networks"),
     ALL_SHOWS("All registered shows"),
     BEST_EPISODES("Best episodes from each show"),
+    RECOMMENDED_SHOWS("Recommended shows"),
     INVALID("Invalid report");
 
     private final String name;

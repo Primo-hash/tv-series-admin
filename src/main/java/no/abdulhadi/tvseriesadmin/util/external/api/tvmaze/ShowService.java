@@ -20,12 +20,12 @@ public class ShowService {
     public static ShowDTO getShow(String showName, String embed) {
         WebClient client = WebClient.builder()
                 .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(WebFluxConfiguration.MAX_WEB_BUFFER_SIZE))
-                .baseUrl(EndpointEnum.BASE.getUri())
+                .baseUrl(EndpointEnum.TVMAZE_BASE.getUri())
                 .build();
 
         String res = client.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path(EndpointEnum.SINGLE_SHOW.getUri())
+                        .path(EndpointEnum.TVMAZE_SINGLE_SHOW.getUri())
                         .queryParam(ParameterEnum.QUERY.getParam(), showName)
                         .queryParam(ParameterEnum.EMBED.getParam(), embed)
                         .build())

@@ -10,7 +10,7 @@ import java.util.*;
 @Getter
 public class NextWeekReport implements Reportable {
     private HashMap<String, List<EpisodeDTO>> showsNextWeek = new HashMap<>();
-    private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
     Calendar calendar = Calendar.getInstance();
 
     public <T extends ShowDTO> NextWeekReport(List<T> shows) {
