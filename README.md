@@ -159,7 +159,7 @@ Download link:
 > Download link:
 >http://localhost:8080/bestepisodes.txt
 
-#### Best Episode Per Show POST
+#### Recommended Shows POST
 >http://localhost:8080/bestepisodes
 > Download link:
 >http://localhost:8080/bestepisodes.txt
