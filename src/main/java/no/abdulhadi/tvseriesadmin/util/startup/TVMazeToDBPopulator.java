@@ -33,6 +33,8 @@ public class TVMazeToDBPopulator {
     private final EpisodeRepository episodeRepository = BeanUtil.getBean(EpisodeRepository.class);
     private final static String embeddedOption = "episodes";
 
+    private final int minimumShows = 60;
+
     @Value("${tvmaze.config.file}")
     private String fileName = "";
 
@@ -43,6 +45,7 @@ public class TVMazeToDBPopulator {
     @PostConstruct
     public void runStartupRoutine() {
         ArrayList<String> showNames = getFileLines();
+        if (showNames.size() < minimumShows) {log.severe("Only " + showNames.size() + " shows in configuration file, minimum is " + minimumShows);}
         ArrayList<ShowDTO> shows = populateDatabaseWithShows(showNames);
         populateDatabaseWithEpisodes(shows);
     }

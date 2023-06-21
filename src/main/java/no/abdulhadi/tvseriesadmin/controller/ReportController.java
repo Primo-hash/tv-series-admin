@@ -74,7 +74,7 @@ public class ReportController {
         return getTopNetworks(response);
     }
 
-    @GetMapping("/reports/allshows")
+    @GetMapping("/reports/summary")
     public String getAllShows(HttpServletResponse response){
         List<ShowDTO> shows = repository.findAll();
         Reportable report = getReport(ReportEnum.ALL_SHOWS, shows, response);
@@ -82,9 +82,9 @@ public class ReportController {
         return report.toStringReport();
     }
 
-    @GetMapping("/reports/allshows.txt")
+    @GetMapping("/reports/summary.txt")
     public String getAllShowsTxtFile(HttpServletResponse response){
-        String fileName = "all_shows.txt";
+        String fileName = "summary.txt";
         response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
         return getAllShows(response);
     }

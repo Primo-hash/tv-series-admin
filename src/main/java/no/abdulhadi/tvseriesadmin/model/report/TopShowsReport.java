@@ -32,7 +32,7 @@ public class TopShowsReport implements Reportable {
             if (i == topTenShows.size() - 1) {
                 report.append("\n");
             } else {
-                report.append(";");
+                report.append(";\n");
             }
         }
         return report.toString().trim();

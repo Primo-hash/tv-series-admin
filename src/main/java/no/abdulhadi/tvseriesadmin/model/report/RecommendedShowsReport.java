@@ -49,6 +49,7 @@ public class RecommendedShowsReport implements Reportable {
         for (RecommendationScoreCardDTO scoreCard : scoreCards) {
             ShowDTO show = shows.stream().filter(selectedShow -> selectedShow.getId().equals(scoreCard.getShowId())).findFirst().orElse(null);
             if (show == null) {continue;}
+            log.info(show.getName() + " recommendation score: " + scoreCard.getTotalScore());
 
             report.append(show.getName()).append(";");
             report.append(show.getRating().getAverage()).append(";");
