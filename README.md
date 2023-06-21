@@ -128,7 +128,7 @@ The API runs on port 8080 by default, and serves a Swagger UI interface which is
 You can access this by navigating to <http://localhost:8080/swagger-ui/index.html> while the project is running.
 
 #### Configuration
-As mentioned in the project description, the project should read a file with a mnimum of 60 show names.  
+As mentioned in the project description, the project should read a file with a minimum of 60 show names.  
 configuration file path:  ```src/main/resources/tvmaze_config.txt```
 You can also change the name of the file, but also have to change the tvmaze.config.file property in application.property to the same name.
 
