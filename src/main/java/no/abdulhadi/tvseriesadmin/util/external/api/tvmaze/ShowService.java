@@ -1,5 +1,6 @@
 package no.abdulhadi.tvseriesadmin.util.external.api.tvmaze;
 
+import lombok.extern.java.Log;
 import no.abdulhadi.tvseriesadmin.exception.InjectorException;
 import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowDTO;
 import no.abdulhadi.tvseriesadmin.util.external.api.WebFluxConfiguration;
@@ -10,6 +11,7 @@ import reactor.util.retry.Retry;
 
 import java.time.Duration;
 
+@Log
 @Service
 public class ShowService {
 
@@ -37,7 +39,8 @@ public class ShowService {
         try {
             return DTOInjector.getDTOFromJSON(res, ShowDTO.class);
         } catch (InjectorException e) {
-            e.printStackTrace();
+            log.info("Could not parse JSON to ShowDTO");
+            log.fine(e.getMessage());
         }
 
         return new ShowDTO();

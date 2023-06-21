@@ -1,6 +1,7 @@
 package no.abdulhadi.tvseriesadmin.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.java.Log;
 import no.abdulhadi.tvseriesadmin.exception.ReportProducerException;
 import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowDTO;
 import no.abdulhadi.tvseriesadmin.model.factory.FactoryEnum;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Log
 @RestController
 public class ReportController {
 
@@ -122,6 +124,8 @@ public class ReportController {
         try {
             report = FactoryProducer.getReportFactory(FactoryEnum.SHOW_REPORT).getReport(reportType, shows);
         } catch (ReportProducerException e) {
+            log.info("Could not create report of type " + reportType.getName());
+            log.fine(e.getMessage());
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return null;
         }
@@ -133,6 +137,8 @@ public class ReportController {
         try {
             report = FactoryProducer.getReportFactory(FactoryEnum.SHOW_REPORT).getParameterizedReport(reportType, shows, parameters);
         } catch (ReportProducerException e) {
+            log.info("Could not create report of type " + reportType.getName());
+            log.fine(e.getMessage());
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return null;
         }

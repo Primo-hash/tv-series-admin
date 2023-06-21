@@ -3,6 +3,7 @@ package no.abdulhadi.tvseriesadmin.util;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 
 @Component
 @NoArgsConstructor
+@Log
 @AllArgsConstructor
 @Builder
 public class TxtFileParser {
@@ -27,7 +29,7 @@ public class TxtFileParser {
                 lines.add(currentLine.trim());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.info("Could not read file lines: " + e.getMessage());
         }
         return lines;
     }

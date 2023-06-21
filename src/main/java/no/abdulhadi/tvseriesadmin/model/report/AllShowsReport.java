@@ -1,6 +1,7 @@
 package no.abdulhadi.tvseriesadmin.model.report;
 
 import lombok.Getter;
+import lombok.extern.java.Log;
 import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.EpisodeDTO;
 import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowDTO;
 
@@ -9,6 +10,7 @@ import java.util.Calendar;
 import java.util.List;
 
 @Getter
+@Log
 public class AllShowsReport implements Reportable {
     private final List<ShowDTO> shows = new ArrayList<>();
 

@@ -1,9 +1,9 @@
 package no.abdulhadi.tvseriesadmin.model.report;
 
 import lombok.Getter;
+import lombok.extern.java.Log;
 import no.abdulhadi.tvseriesadmin.model.dto.RecommendationScoreCardDTO;
 import no.abdulhadi.tvseriesadmin.model.dto.ShowRecommendationFilterDTO;
-import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.NetworkDTO;
 import no.abdulhadi.tvseriesadmin.model.dto.tvmaze.ShowDTO;
 import no.abdulhadi.tvseriesadmin.util.external.api.imdb.EndpointEnum;
 import no.abdulhadi.tvseriesadmin.util.injector.DTOInjector;
@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentSkipListMap;
 
 @Getter
+@Log
 public class RecommendedShowsReport implements Reportable {
     private List<RecommendationScoreCardDTO> scoreCards;
     private final List<ShowDTO> shows = new ArrayList<>();
@@ -72,7 +73,7 @@ public class RecommendedShowsReport implements Reportable {
             scoreCard.addPremiereScore(getPremieredAfterScore(formatter.parse(show.getPremiered()), showFilter.getPremieredAfter()));
             scoreCard.addPremiereScore(getPremieredBeforeScore(formatter.parse(show.getPremiered()), showFilter.getPremieredBefore()));
         } catch (ParseException | NullPointerException e) {
-            e.printStackTrace();
+            log.info(e.getMessage());
         }
 
         scoreCard.addRunningShowScore(getRunningShowScore(show.getStatus(), showFilter.getRunningShow()));

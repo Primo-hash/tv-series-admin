@@ -19,11 +19,7 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -74,7 +70,7 @@ public class TVMazeToDBPopulator {
            TxtFileParser txtFileParser = TxtFileParser.builder().fileReader(new FileReader(file.getAbsolutePath())).build();
            lines = txtFileParser.getLinesAsStrings();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            log.severe(e.getMessage());
         }
 
         return lines;
